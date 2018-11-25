@@ -6,12 +6,12 @@
     %ul.navbar-nav.mr-auto
       %li.nav-item.active
         %a.nav-link{:href => "#"}
-          Home
+          Dashboard
           %span.sr-only (current)
       %li.nav-item
-        %a.nav-link{:href => "#"} Link
-      %li.nav-item
-        %a.nav-link.disabled{:href => "#"} Disabled
+        %a.nav-link{:href => "#"} Account
     %form.form-inline.mt-2.mt-md-0
-      %input.form-control.mr-sm-2{"aria-label" => "Search", :placeholder => "Search", :type => "text"}/
-      %button.btn.btn-outline-success.my-2.my-sm-0{:type => "submit"} Search
+      - if current_user
+        = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success"
+      - else
+        = link_to "Sign In", user_session_path, class: "btn btn-outline-success"

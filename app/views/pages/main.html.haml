@@ -1,10 +1,4 @@
-.container
-  %h3 Log in Now!
-  %form
-    .form-group
-      = text_field_tag :username, "", placeholder: "Username or email", class: "form-control"
-    .form-group
-      = text_field_tag :password, "", placeholder: "•••••••••", class: "form-control"
-    .btn.btn-success Submit
-
-
+.container.text-center
+  .circle-button.btn.btn-info
+    = link_to new_session_path(resource_name) do
+      %h3 Log in Now!

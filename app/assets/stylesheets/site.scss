@@ -19,3 +19,21 @@ table {
     background-color: #5cb85c;
   }
 }
+
+.text-center {
+  text-align: center;
+}
+
+.circle-button {
+  position: relative;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+
+  a {
+    position: absolute;
+    top: 105px;
+    right: 55px;
+    color: #fff;
+  }
+}
