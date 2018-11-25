@@ -1,1 +1,21 @@
+.app-content {
+  height: 100vh;
+  overflow: auto;
+}
 
+table {
+  td {
+    padding: 0px 5px;
+  }
+}
+
+.circle {
+  height: 8px;
+  width: 8px;
+  background-color: black;
+  border-radius: 50%;
+
+  &.green {
+    background-color: #5cb85c;
+  }
+}
