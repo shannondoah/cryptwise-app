@@ -13,13 +13,13 @@ class PaymentsController< ApplicationController
   end
 
   def create
-    @payment = Payment.create(payment_params)
+    @payment = current_user.entered_payments.create(payment_params)
     redirect_back fallback_location: payments_path, flash: {success: "Added a new bill"}
   end
 
   private
 
   def payment_params
-    params.require(:payment).permit(:amount, :currency, :description, :payer_id)
+    params.require(:payment).permit(:amount, :currency, :description, :payer_id, :debtor_ids, :category, :split_evenly)
   end
 end

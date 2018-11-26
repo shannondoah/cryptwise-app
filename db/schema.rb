@@ -10,16 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_195616) do
+ActiveRecord::Schema.define(version: 2018_11_26_030740) do
+
+  create_table "debts", force: :cascade do |t|
+    t.integer "payment_id"
+    t.integer "user_id"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payment_id"], name: "index_debts_on_payment_id"
+    t.index ["user_id"], name: "index_debts_on_user_id"
+  end
 
   create_table "payments", force: :cascade do |t|
+    t.integer "creator_id", null: false
     t.integer "payer_id", null: false
     t.float "amount", default: 0.0, null: false
     t.string "currency", default: "CAD", null: false
     t.string "description"
     t.string "category"
+    t.boolean "split_evenly", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_payments_on_creator_id"
     t.index ["payer_id"], name: "index_payments_on_payer_id"
   end
 

@@ -15,7 +15,11 @@
       = f.text_field :description, class: "form-control"
     .form-group
       = f.label :payer_id
-      = f.collection_select :payer_id, User.all, :id, :first_name, {selected: current_user}, {:class => "form-control"}
+      = f.collection_select :payer_id, User.all, :id, :first_name, {selected: current_user}, {class: "form-control"}
+    .form-group
+      %label People involved
+      = f.collection_select :debtor_ids, User.all, :id, :first_name, {multiple: true}, {class: "form-control", multiple: true}
+
   .modal-footer
     %button.btn.btn-primary Save
 
