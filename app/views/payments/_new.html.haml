@@ -1,9 +1,22 @@
-.modal-header
-  %h4#myModalLabel.modal-title Modal title
-  %button.close{"data-dismiss" => "modal", :type => "button"} x
-.modal-body
-  %h3 HELLO JOE
-.modal-footer
-  %button.btn.btn-primary Save
+= form_for @bill do |f|
+  .modal-header
+    %h4#myModalLabel.modal-title Add a bill
+    %button.close{"data-dismiss" => "modal", :type => "button"} x
+  .modal-body
+    = devise_error_messages!
+    .form-group
+      = f.label :amount
+      = f.number_field :amount, class: "form-control"
+    .form-group
+      = f.label :currency
+      = f.select :currency, Payment::CURRENCIES, {include_blank: false}, {class: "form-control"}
+    .form-group
+      = f.label :description
+      = f.text_field :description, class: "form-control"
+    .form-group
+      = f.label :payer_id
+      = f.collection_select :payer_id, User.all, :id, :first_name, {selected: current_user}, {:class => "form-control"}
+  .modal-footer
+    %button.btn.btn-primary Save
 
 
