@@ -8,9 +8,37 @@
       %h3 $45.60 CAD
     %hr
     .container.text-center
-      %button.btn.btn-info Dashboard
-      %button.btn.btn-info All Balances
-  .col-6{style: "background-color:bisque;"}
+      %button.btn.btn-outline-info Dashboard
+      %button.btn.btn-outline-info All Balances
+  .col-6.no-padding
+    .header
+      %h3 Expenses
+      .header-actions
+        = link_to "Add a bill", new_payment_path, remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info"
+        #modal-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+          .modal-dialog{:role => "document"}
+            .modal-content
+
+    .container.no-padding
+      %table.table.payments-list
+        %tbody
+          %tr
+            %td Jimmy paid $30 to Stella
+          %tr
+            %td
+              %strong Dinner at Luigi's
+            %td
+              %strong $170
+          %tr
+            %td Stella paid $5.50 to Donna
+          %tr
+            %td
+              %strong Party Booze
+            %td
+              %strong $80
+          %tr
+            %td Taxi Home
+
   .col-3
     .container
       %h4.pad-top Friends

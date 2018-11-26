@@ -3,15 +3,15 @@
   %button.navbar-toggler{"aria-controls" => "navbarCollapse", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarCollapse", "data-toggle" => "collapse", :type => "button"}
     %span.navbar-toggler-icon
   #navbarCollapse.collapse.navbar-collapse
-    %ul.navbar-nav.mr-auto
-      %li.nav-item.active
-        %a.nav-link{:href => "#"}
-          Dashboard
-          %span.sr-only (current)
-      %li.nav-item
-        %a.nav-link{:href => "#"} Account
-    %form.form-inline.mt-2.mt-md-0
-      - if current_user
-        = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success"
-      - else
-        = link_to "Sign In", user_session_path, class: "btn btn-outline-success"
+    - if current_user
+      %ul.navbar-nav.mr-auto
+        %li.nav-item.active
+          %a.nav-link{:href => "#"}
+            Dashboard
+            %span.sr-only (current)
+        %li.nav-item
+          %a.nav-link{:href => "#"} Account
+    - if current_user
+      = link_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-outline-success"
+    - else
+      = link_to "Sign In", user_session_path, class: "btn btn-outline-success"

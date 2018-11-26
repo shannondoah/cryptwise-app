@@ -196,6 +196,7 @@ DEPENDENCIES
   haml (~> 5.0.4)
   haml-rails (~> 1.0)
   jquery-rails
+  popper_js (~> 1.14.3)
   puma (~> 3.11)
   rails (~> 5.2.0)
   sass-rails (~> 5.0)

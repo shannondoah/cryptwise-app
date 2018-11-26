@@ -1,3 +1,6 @@
+$grey: #CDD3D9;
+$offwhite: #F1F7FD;
+
 .app-content {
   height: 100vh;
   overflow: auto;
@@ -36,4 +39,28 @@ table {
     right: 55px;
     color: #fff;
   }
+}
+
+.header {
+  position: relative;
+  padding: 10px;
+  background-color: $grey;
+
+  h3 {
+    display: inline-block;
+  }
+
+  .header-actions {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+  }
+}
+
+.payments-list {
+  background-color: $offwhite;
+}
+
+.no-padding {
+  padding: 0;
 }
