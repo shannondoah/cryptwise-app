@@ -1,4 +1,4 @@
-class Payment < ApplicationRecord
+class Expense < ApplicationRecord
   CURRENCIES = %w[CAD].freeze
 
   belongs_to :creator, class_name: "User"

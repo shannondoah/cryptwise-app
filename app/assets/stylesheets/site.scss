@@ -1,15 +1,23 @@
 $grey: #CDD3D9;
 $offwhite: #F1F7FD;
+$offblack: #343a40;
 
 .app-content {
   height: 100vh;
   overflow: auto;
+  color: $offblack;
 }
 
 table {
   td {
     padding: 0px 5px;
   }
+}
+
+.avatar {
+  height: 100px;
+  width: 100px;
+  margin-bottom: 10px;
 }
 
 .circle {

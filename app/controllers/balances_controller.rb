@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-class UsersController< ApplicationController
+class BalancesController< ApplicationController
   before_action :authenticate_user!
-
-  def show
-  end
 end

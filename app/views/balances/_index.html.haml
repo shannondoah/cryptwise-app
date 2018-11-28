@@ -1,0 +1,8 @@
+.col-6.no-padding
+  .header
+    %h3 Balances
+    .header-actions
+      = link_to "Settle Up", new_expense_path, remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info"
+      #modal-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+        .modal-dialog{:role => "document"}
+          .modal-content
