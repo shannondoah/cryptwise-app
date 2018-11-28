@@ -40,3 +40,29 @@ end
     u2.friendships_as_secondary.create!(primary: u)
   end
 end
+
+30.times.each do |n|
+  Expense.create(
+    creator: [a,b].sample,
+    payer: User.all.sample,
+    amount: rand(10.0...125.0).round(2),
+    description: Faker::Company.bs,
+    kind: "payment",
+    payment_kind: Expense::PAYMENT_KINDS.sample,
+    debtor_ids: User.pluck(:id).sample(rand(1..6)).join(","),
+    created_at: rand(1.month.ago..1.day.ago)
+  )
+end
+
+10.times.each do |n|
+  payer = User.all.sample
+  Expense.create(
+    payer: payer,
+    creator: payer,
+    amount: rand(10.0...50.0).round,
+    kind: "payment",
+    payment_kind: Expense::PAYMENT_KINDS.sample,
+    debtor_ids: User.pluck(:id).sample(2).join(","),
+    created_at: rand(2.weeks.ago..1.day.ago)
+  )
+end

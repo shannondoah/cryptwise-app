@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_025120) do
+ActiveRecord::Schema.define(version: 2018_11_28_033954) do
 
   create_table "debts", force: :cascade do |t|
     t.integer "expense_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2018_11_28_025120) do
     t.boolean "split_evenly", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "kind", default: "expense"
+    t.string "payment_kind", default: "sent"
     t.index ["creator_id"], name: "index_expenses_on_creator_id"
     t.index ["payer_id"], name: "index_expenses_on_payer_id"
   end
