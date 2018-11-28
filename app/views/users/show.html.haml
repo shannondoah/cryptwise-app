@@ -1,0 +1,34 @@
+.row.app-content
+  .col-3
+    = render "layouts/user_sidebar"
+  .col-6.no-padding
+    .header
+      %h3 Your Account
+
+    .container.no-padding#account
+      .pad-content
+        .row
+          .col-6
+            %strong Email
+            %p= current_user.email
+          .col-6
+            %strong Member since
+            %p= current_user.created_at.to_date
+        %br
+        .row
+          .col-12
+            %h4 Wallet Addresses
+            %hr
+          .col-12
+            - if current_user.wallet_addresses.any?
+              - current_user.wallet_addresses.each do |wa|
+                = wa.address
+                - if wa.is_default
+                  %em (Default)
+            - else
+              .text-center
+                %p You haven't registered any wallet addresses yet.
+                %p Register one now and your friends can send money to it!
+                %button.btn.btn-info Register an Address
+  .col-3
+    = render "layouts/friends_sidebar"

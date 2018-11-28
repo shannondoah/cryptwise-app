@@ -1,0 +1,15 @@
+.container
+  %h4.pad-top Friends
+  %hr
+  - if current_user.friendships.any?
+    %table
+      %tbody
+        - current_user.friendships.each do |f|
+          %tr
+            %td
+              .circle
+            %td
+              %em= f.friend_to(current_user)
+  - else
+    %p
+      %em You have no friends :(

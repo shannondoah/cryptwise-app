@@ -1,12 +1,6 @@
 .row.app-content
   .col-3
-    .container.text-center
-      %img.rounded-circle.avatar{src: current_user.avatar_url}
-      %h3= current_user
-
-      %span
-      %span You are owed
-      %h3 $45.60 CAD
+    = render "layouts/user_sidebar"
     %hr
     .container.text-center
       = link_to "Expenses", root_path, class: "btn btn-outline-info #{'disabled' if @content == 'expenses'}"
@@ -15,18 +9,4 @@
   = render "#{@content}/index"
 
   .col-3
-    .container
-      %h4.pad-top Friends
-      %hr
-      - if current_user.friendships.any?
-        %table
-          %tbody
-            - current_user.friendships.each do |f|
-              %tr
-                %td
-                  .circle
-                %td
-                  %em= f.friend_to(current_user)
-      - else
-        %p
-          %em You have no friends :(
+    = render "layouts/friends_sidebar"
