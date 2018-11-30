@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :balances
   resources :expenses
   resource :dashboard, only: :show
+  get :homepage, to: "pages#show"
 
   authenticated :user do
     root to: "dashboard#show", as: :authenticated_root
