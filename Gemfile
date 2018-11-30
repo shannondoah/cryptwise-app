@@ -13,8 +13,9 @@ gem "haml",         "~> 5.0.4"
 gem "haml-rails",   "~> 1.0"
 gem "jquery-rails"
 gem "bootstrap",    "~> 4.1.3"
-gem "popper_js", "~> 1.14.3"
-gem "faker", "~> 1.7.3"
+gem "popper_js",    "~> 1.14.3"
+gem "faker",        "~> 1.7.3"
+gem 'ethereum.rb',  "~> 2.2"
 
 
 # Use Capistrano for deployment
