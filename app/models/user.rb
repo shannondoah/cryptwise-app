@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :entered_expenses, class_name: "Payment", foreign_key: :creator_id
-  has_many :expenses, class_name: "Payment", foreign_key: :payer_id
+  has_many :entered_expenses, class_name: "Expense", foreign_key: :creator_id
+  has_many :expenses, class_name: "Expense", foreign_key: :payer_id
   has_many :debts
   has_many :friendships_as_primary, class_name: "Friendship", foreign_key: "primary_id", dependent: :destroy
   has_many :friendships_as_secondary, class_name: "Friendship", foreign_key: "secondary_id", dependent: :destroy
@@ -25,6 +25,10 @@ class User < ApplicationRecord
 
   def friendships
     Friendship.by_user(id)
+  end
+
+  def friendship_with(user)
+    friendships.by_user(user.id).first
   end
 
   def friends

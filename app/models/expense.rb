@@ -38,6 +38,9 @@ class Expense < ApplicationRecord
   def update_total_balances
     payer.update(total_balance: payer.total_balance - amount)
     debts.each do |debt|
+      fship = payer.friendship_with(debt.user)
+      fship.balance(fship.primary == payer, debt.amount)
+
       debt.user.update(total_balance: debt.user.total_balance + debt.amount)
     end
   end

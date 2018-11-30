@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_28_033954) do
+ActiveRecord::Schema.define(version: 2018_11_29_053715) do
 
   create_table "debts", force: :cascade do |t|
     t.integer "expense_id"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 2018_11_28_033954) do
     t.integer "secondary_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "primary_owes", default: 0.0
+    t.float "secondary_owes", default: 0.0
     t.index ["primary_id"], name: "index_friendships_on_primary_id"
     t.index ["secondary_id"], name: "index_friendships_on_secondary_id"
   end
