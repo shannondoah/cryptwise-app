@@ -3,5 +3,9 @@
   %h3= current_user
 
   %span
-  %span You are owed
-  %h3 $45.60 CAD
+  - if current_user.total_balance > 0
+    %span You owe
+    %h3.red $#{current_user.total_balance.round(2)} CAD
+  - else
+    %span You are owed
+    %h3.green $#{current_user.total_balance.abs.round(2)} CAD

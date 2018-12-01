@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users
+  resources :users do
+    resources :wallet_addresses, only: %i[new create]
+  end
   resources :balances
   resources :expenses
   resource :dashboard, only: :show

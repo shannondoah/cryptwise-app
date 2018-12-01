@@ -4,7 +4,7 @@ class ExpensesController< ApplicationController
   before_action :authenticate_user!
 
   def new
-    @expense = Expense.new()
+    @expense = current_user.expenses.build
     respond_to do |format|
       format.html
       format.js

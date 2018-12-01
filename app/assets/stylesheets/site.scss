@@ -30,10 +30,14 @@ table {
   width: 8px;
   background-color: black;
   border-radius: 50%;
+}
 
-  &.green {
-    background-color: #5cb85c;
-  }
+.green {
+  color: #5cb85c;
+}
+
+.red {
+  color: #d9534f;
 }
 
 .text-center {
@@ -66,4 +70,9 @@ table {
 
 .pad-content {
   padding: 15px;
+}
+
+.small {
+  display: block;
+  font-size: small;
 }

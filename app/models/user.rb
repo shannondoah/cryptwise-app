@@ -11,6 +11,10 @@ class User < ApplicationRecord
   has_many :friendships_as_secondary, class_name: "Friendship", foreign_key: "secondary_id", dependent: :destroy
   has_many :wallet_addresses, dependent: :destroy
 
+  has_many :owed_expenses, through: :debts, source: :expense
+
+  has_one :default_address, -> { where(is_default: true) }, through: :wallet_addresses
+
   before_save do
     self.avatar_url ||= "https://testing-cdn.spark.re/uploads/material/upload/4ab581955f989e8f335f56fd34dd4a5c/Untitled_design__3_.png"
   end
@@ -35,5 +39,9 @@ class User < ApplicationRecord
     secondary_ids = friendships_as_primary.pluck(:secondary_id)
     primary_ids = friendships_as_secondary.pluck(:primary_id)
     User.where(id: [secondary_ids, primary_ids].flatten)
+  end
+
+  def involved_expenses
+    (entered_expenses + expenses + owed_expenses).uniq!
   end
 end

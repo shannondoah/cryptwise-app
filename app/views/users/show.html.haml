@@ -29,6 +29,12 @@
               .text-center
                 %p You haven't registered any wallet addresses yet.
                 %p Register one now to make it easier for your friends to deposit payments for you!
-                %button.btn.btn-info Register an Address
+
+            .text-center
+              = link_to "Register an Address", new_user_wallet_address_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info"
+            #modal-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+              .modal-dialog{:role => "document"}
+                .modal-content
+
   .col-3
     = render "layouts/friends_sidebar"

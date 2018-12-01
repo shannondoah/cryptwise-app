@@ -1,0 +1,17 @@
+= form_for [current_user, @wallet_address] do |f|
+  .modal-header
+    %h4#myModalLabel.modal-title Register an Address
+    %button.close{"data-dismiss" => "modal", :type => "button"} x
+  .modal-body
+    %p Register your public account address from the wallet you wish to deposit and withdraw funds from.
+    .form-group
+      = f.label :address
+      = f.text_field :address, placeholder: "eg: 0x0....",  class: "form-control"
+    - if current_user.wallet_addresses.reject(&:new_record?).any?
+      .checkbox
+        %label
+          = f.check_box :is_default
+          Make this my default address?
+
+  .modal-footer
+    %button.btn.btn-primary Save

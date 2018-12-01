@@ -8,22 +8,27 @@
           .modal-content
 
   .container.no-padding
-    %table.table.payments-list
-      %tbody
-        %tr
-          %td Jimmy paid $30 to Stella
-        %tr
-          %td
-            %strong Dinner at Luigi's
-          %td
-            %strong $170
-        %tr
-          %td Stella paid $5.50 to Donna
-        %tr
-          %td
-            %strong Party Booze
-          %td
-            %strong $80
-        %tr
-          %td Taxi Home
+    - if current_user.involved_expenses.any?
+      %table.table.payments-list
+        %tbody
+          - current_user.involved_expenses.each do |expense|
+            %tr
+              - if expense.kind == "payment"
+                %td= expense
+                %td
+                %td
+                %td= expense.created_at.strftime("%b %-d")
+              - else
+                %td
+                  %em.small Created by #{expense.creator}
+                  %strong= expense
+                %td.you-paid
+                  %em.small You paid
+                  %h5.green $#{format("%.2f", expense.paid_by(current_user.id))}
+                %td.you-owe
+                  %em.small You owe
+                  %h5.red $#{format("%.2f", expense.owed_by(current_user.id))}
+                %td
+                  %em.small #{expense.people_involved.count} involved
+                  = expense.created_at.strftime("%b %-d")
 

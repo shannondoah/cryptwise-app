@@ -17,8 +17,16 @@ class Expense < ApplicationRecord
     if payment?
       [payer, payment_kind, "$", amount, "to", debts.first.user, "."].join(" ")
     else
-      description
+      description.capitalize
     end
+  end
+
+  def paid_by(user_id)
+    user_id == payer_id ? amount : 0.0
+  end
+
+  def owed_by(user_id)
+    debtor_ids.include?(user_id) ? amount / debtor_ids.length : 0.0
   end
 
   def debtor_ids
@@ -31,6 +39,10 @@ class Expense < ApplicationRecord
       debt = debts.find_or_initialize_by(user_id: uid)
       debt.amount = amount / ids.length
     end
+  end
+
+  def people_involved
+    User.where(id: [payer_id, *debtor_ids])
   end
 
   private
