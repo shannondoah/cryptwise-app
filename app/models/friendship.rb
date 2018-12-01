@@ -14,11 +14,11 @@ class Friendship < ApplicationRecord
 
   def balance(payerIsPrimary, amount)
     if payerIsPrimary
-      primary_owes -= amount
-      secondary_owes += amount
+      self.primary_owes -= amount
+      self.secondary_owes += amount
     else
-      primary_owes += amount
-      secondary_owes -= amount
+      self.primary_owes += amount
+      self.secondary_owes -= amount
     end
     save!
   end

@@ -24,10 +24,10 @@
                   %strong= expense
                 %td.you-paid
                   %em.small You paid
-                  %h5.green $#{format("%.2f", expense.paid_by(current_user.id))}
+                  %h5{class: (expense.paid_by(current_user.id) == 0.0 ? 'grey' : 'green') } $#{format("%.2f", expense.paid_by(current_user.id))}
                 %td.you-owe
                   %em.small You owe
-                  %h5.red $#{format("%.2f", expense.owed_by(current_user.id))}
+                  %h5{class: (expense.owed_by(current_user.id) == 0.0 ? 'grey' : 'red') } $#{format("%.2f", expense.owed_by(current_user.id))}
                 %td
                   %em.small #{expense.people_involved.count} involved
                   = expense.created_at.strftime("%b %-d")

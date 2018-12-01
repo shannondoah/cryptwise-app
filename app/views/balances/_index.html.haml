@@ -1,8 +1,51 @@
 .col-6.no-padding
   .header
     %h3 Balances
-    .header-actions
-      = link_to "Settle Up", new_expense_path, remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info"
-      #modal-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
-        .modal-dialog{:role => "document"}
-          .modal-content
+
+  .container.no-padding
+    -# if current_user.wallet_addresses.any?
+    .pad-content
+      .col-12.text-center
+        %h5 Funds available to withdraw
+        %h3 $0.00
+        %button.btn.btn-success Withdraw Funds
+        %hr
+    - if current_user.friendships.any?
+      %table.table.payments-list
+        %tbody
+          - current_user.friendships.each do |friendship|
+            %tr
+              - if current_user == friendship.primary
+                %td
+                  %strong= friendship.secondary
+                %td
+                  %em.small You owe
+                  - if friendship.primary_owes < 0.0
+                    %h5.grey $0.00
+                  - else
+                    %h5.red $#{format("%.2f", friendship.primary_owes)}
+                %td.you-owe
+                  %em.small They owe
+                  - if friendship.secondary_owes < 0.0
+                    %h5.grey $0.00
+                  - else
+                    %h5.green $#{format("%.2f", friendship.secondary_owes)}
+                %td.settle-up
+                  %button.btn.btn-info Settle Up
+              - else
+                %td
+                  %strong= friendship.primary
+                %td
+                  %em.small You owe
+                  - if friendship.secondary_owes < 0.0
+                    %h5.grey $0.00
+                  - else
+                    %h5.red $#{format("%.2f", friendship.secondary_owes)}
+                %td.you-owe
+                  %em.small They owe
+                  - if friendship.primary_owes < 0.0
+                    %h5.grey $0.00
+                  - else
+                    %h5.green $#{format("%.2f", friendship.primary_owes)}
+                %td.settle-up
+                  %button.btn.btn-info Settle Up

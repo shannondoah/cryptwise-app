@@ -40,6 +40,10 @@ table {
   color: #d9534f;
 }
 
+.grey {
+  color: $grey;
+}
+
 .text-center {
   text-align: center;
 }
@@ -75,4 +79,8 @@ table {
 .small {
   display: block;
   font-size: small;
+}
+
+.settle-up button {
+  float: right;
 }
