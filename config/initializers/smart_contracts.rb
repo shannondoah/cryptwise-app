@@ -1,8 +1,6 @@
-Rails.application.config
-
 Rails.application.config.ethereum_client = Ethereum::HttpClient.new('http://localhost:8545')
 Rails.application.config.registry_contract = Ethereum::Contract.create(
-      name: "CryptwiseRegistry",
+  name: "CryptwiseRegistry",
   truffle: { paths: [ '/Users/shannon/Sites/splitwisr' ] },
   client: Rails.application.config.ethereum_client
 )

@@ -13,7 +13,7 @@ class ExpensesController< ApplicationController
 
   def create
     @expense = current_user.entered_expenses.create(expense_params)
-    redirect_back fallback_location: expenses_path, flash: {success: "Added a new bill"}
+    redirect_back fallback_location: dashboard_path, flash: {success: "Added a new bill"}
   end
 
   private

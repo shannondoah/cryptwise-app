@@ -20,7 +20,9 @@ class DashboardController< ApplicationController
     when "balances"
       return unless current_user.default_address.present?
 
-      @balance_to_withdraw = Rails.application.config.cryptwise_contract.call.payments_for(current_user.default_address.address)
+      value_in_wei = Rails.application.config.cryptwise_contract.call.payments_for(current_user.default_address.address)
+      @balance_in_eth = CurrencyConverter.eth_from_wei(value_in_wei)
+      @balance_in_cad = CurrencyConverter.to_cad(@balance_in_eth)
     end
   end
 end

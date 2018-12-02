@@ -2,16 +2,29 @@
   .header
     %h3 Balances
 
+  #modal-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+
   .container.no-padding
-    -# if current_user.wallet_addresses.any?
     .pad-content
       .col-12.text-center
         %h5 Funds available to withdraw
-        - if defined?(@balance_to_withdraw)
-          %h3 ETH #{@balance_to_withdraw}
-          %button.btn.btn-success Withdraw Funds
+        - if defined?(@balance_in_cad)
+          - if @balance_in_eth > 0
+            %h3
+              .green $#{format("%.2f", @balance_in_cad)} CAD
+            %h4
+              %em.grey ETH #{@balance_in_eth}
+            %button.btn.btn-success#withdraw Withdraw Funds
+          - else
+            %h5
+              %em.grey Nothing to withdraw.
         - else
-          %h3 ETH $0.00
+          %h3
+            .grey $0.00 CAD
+          %h4
+            %em.grey ETH 0
           %p
             %em You haven't set up a digital wallet address yet!
           %buttom.btn.btn-info Find out more
@@ -27,32 +40,32 @@
                   %strong= friendship.secondary
                 %td
                   %em.small You owe
-                  - if friendship.primary_owes < 0.0
+                  - if friendship.primary_owes <= 0.0
                     %h5.grey $0.00
                   - else
                     %h5.red $#{format("%.2f", friendship.primary_owes)}
                 %td.you-owe
                   %em.small They owe
-                  - if friendship.secondary_owes < 0.0
+                  - if friendship.secondary_owes <= 0.0
                     %h5.grey $0.00
                   - else
                     %h5.green $#{format("%.2f", friendship.secondary_owes)}
                 %td.settle-up
-                  %button.btn.btn-info Settle Up
+                  = link_to "Settle Up", new_payment_path(user_id: friendship.secondary_id), remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info settle-up"
               - else
                 %td
                   %strong= friendship.primary
                 %td
                   %em.small You owe
-                  - if friendship.secondary_owes < 0.0
+                  - if friendship.secondary_owes <= 0.0
                     %h5.grey $0.00
                   - else
                     %h5.red $#{format("%.2f", friendship.secondary_owes)}
                 %td.you-owe
                   %em.small They owe
-                  - if friendship.primary_owes < 0.0
+                  - if friendship.primary_owes <= 0.0
                     %h5.grey $0.00
                   - else
                     %h5.green $#{format("%.2f", friendship.primary_owes)}
                 %td.settle-up
-                  %button.btn.btn-info Settle Up
+                  = link_to "Settle Up", new_payment_path(user_id: friendship.primary_id), remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info settle-up"

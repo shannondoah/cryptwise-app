@@ -1,7 +1,7 @@
 class Expense < ApplicationRecord
   CURRENCIES = %w[CAD].freeze
   KINDS = %w[payment expense]
-  PAYMENT_KINDS = %w[sent deposited withdrew]
+  PAYMENT_KINDS = %w[paid deposited withdrew]
 
   belongs_to :creator, class_name: "User"
   belongs_to :payer, class_name: "User"
@@ -15,7 +15,7 @@ class Expense < ApplicationRecord
 
   def to_s
     if payment?
-      [payer, payment_kind, "$#{format("%.2f", amount)}", "to", debts.first.user, "."].join(" ")
+      [payer, payment_kind, "$#{format("%.2f", amount)}", "to", debts.first.user].join(" ")
     else
       description.capitalize
     end
@@ -50,7 +50,7 @@ class Expense < ApplicationRecord
   def update_total_balances
     payer.update(total_balance: payer.total_balance - amount)
     debts.each do |debt|
-      fship = payer.friendship_with(debt.user)
+      fship = payer.friendship_with(debt.user_id)
       fship.balance(fship.primary == payer, debt.amount)
 
       debt.user.update(total_balance: debt.user.total_balance + debt.amount)

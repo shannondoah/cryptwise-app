@@ -31,8 +31,8 @@ class User < ApplicationRecord
     Friendship.by_user(id)
   end
 
-  def friendship_with(user)
-    friendships.by_user(user.id).first
+  def friendship_with(user_id)
+    friendships.by_user(user_id).first
   end
 
   def friends

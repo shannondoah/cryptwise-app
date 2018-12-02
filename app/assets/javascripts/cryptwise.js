@@ -1,33 +1,27 @@
 window.addEventListener('load', async () => {
-    // Modern dapp browsers...
     if (window.ethereum) {
         window.web3 = new Web3(ethereum);
         try {
-            // Request account access if needed
             await ethereum.enable();
-            // Acccounts now exposed
-            web3.eth.sendTransaction({/* ... */});
         } catch (error) {
-            // User denied account access...
+           console.log(error);
         }
-    }
-    // Legacy dapp browsers...
-    else if (window.web3) {
+    } else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
-        // Acccounts always exposed
-        web3.eth.sendTransaction({/* ... */});
-    }
-    // Non-dapp browsers...
-    else {
+    } else {
         alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
 
     function callback(err, tx) {
         if (!err) {
-            return tx;
+            console.log(tx);
         } else {
             console.log(err);
         }
+    }
+
+    function toEth(val) {
+        return val * CryptwiseApp.conversionRate;
     }
 
     const getContract = async (json, address, web3 = window.web3) => {
@@ -44,30 +38,47 @@ window.addEventListener('load', async () => {
         });
     }
 
+    const cryptwiseContract = await getContract(CryptwiseApp.cryptwiseJson.abi, CryptwiseApp.cryptwiseAddress);
 
-    const registryContract = await getContract(CryptwiseApp.registryJson.abi, CryptwiseApp.registryAddress);
+    const cryptwiseEvent = cryptwiseContract.allEvents({ fromBlock: 0, toBlock: 'latest' });
 
-    // await registryContract.registerContract("0x42874bcbea7b97551e0bf71f9693775bd005f76b", {from: web3.eth.accounts[0]}, function(err, tx) {
-    //     if (!err) {
-    //         return tx;
-    //     } else {
-    //         console.log(err);
-    //     }
-    // });
-    const cryptwiseAddress = await registryContract.registeredContract.call((err, resp) => {
-        if (err != null) {
-            console.log(_err);
-        } else {
-            console.log(resp);
+    $(document).on("click", "#pay_button", (e) => {
+        if (!document.getElementById("payee-address")) return;
+        if (document.getElementById("expense_payment_kind").value !== "deposited") return;
+
+        e.preventDefault();
+        const form = $("#payments_form");
+        const toAddr = $("#payee-address").data("address");
+        let amount = form.find("#expense_amount").val();
+
+        if (amount <= 0) {
+            alert("Amount must be greater than 0");
+            return;
         }
+
+        amount = toEth(amount);
+        amount = web3.toWei(amount, "ether");
+
+        cryptwiseContract.deposit(toAddr, {value: amount}, (err, tx) => {
+            if (!err) {
+                $("#payments_form").submit();
+            } else {
+                console.log(err);
+            }
+        })
     });
 
-    debugger
-    const cryptwiseContract = await getContract(CryptwiseApp.cryptwiseJson.abi, "0x42874bcbea7b97551e0bf71f9693775bd005f76b");
+    $("#withdraw").on("click", (e) => {
+        e.preventDefault();
 
-    debugger
-    const registryEvent = registryContract.allEvents({ fromBlock: 0, toBlock: 'latest' });
-
+        cryptwiseContract.withdraw((err, tx) => {
+            if (!err) {
+                window.location.reload();
+            } else {
+                console.log(err);
+            }
+        })
+    });
 });
 
 

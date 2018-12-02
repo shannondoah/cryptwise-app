@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :wallet_addresses, only: %i[new create]
   end
-  resources :balances
-  resources :expenses
+  resources :payments, only: %i[new create]
+  resources :expenses, only: %i[new create]
   resource :dashboard, only: :show
   get :homepage, to: "pages#show"
 

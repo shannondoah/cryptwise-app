@@ -1,0 +1,21 @@
+= form_for @payment, url: payments_path, html: {id: "payments_form"} do |f|
+  .modal-header
+    %h4#myModalLabel.modal-title Settle up with #{@payee}
+    %button.close{"data-dismiss" => "modal", :type => "button"} x
+  .modal-body
+    = devise_error_messages!
+    - if @payee.default_address.present?
+      #payee-address{"data-address" => @payee.default_address.address}
+      .form-group
+        = f.label :payment_kind
+        = f.select :payment_kind, [["Record a payment", "paid"], ["Send ether", "deposited"]], { include_blank: false }, {class: "form-control" }
+    - else
+      = f.hidden_field :payment_kind, value: "paid"
+    .form-group
+      = f.label :amount, "Amount in CAD"
+      = f.number_field :amount, value: [@friendship.balance_of(current_user), 0.0].max, min: 0.0, required: true, class: "form-control"
+
+    = f.hidden_field :debtor_ids, value: @payee.id
+
+  .modal-footer
+    %button.btn.btn-primary#pay_button Save
