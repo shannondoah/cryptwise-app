@@ -66,6 +66,10 @@ table {
 
 .payments-list {
   background-color: $offwhite;
+
+  td.date {
+    width: 15%;
+  }
 }
 
 .no-padding {
@@ -83,4 +87,8 @@ table {
 
 .settle-up button {
   float: right;
+}
+
+.addresses {
+  margin-bottom: 20px;
 }

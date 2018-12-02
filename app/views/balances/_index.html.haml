@@ -7,7 +7,7 @@
     .pad-content
       .col-12.text-center
         %h5 Funds available to withdraw
-        %h3 $0.00
+        %h3 ETH #{@balance_to_withdraw}
         %button.btn.btn-success Withdraw Funds
         %hr
     - if current_user.friendships.any?

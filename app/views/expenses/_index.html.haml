@@ -11,13 +11,13 @@
     - if current_user.involved_expenses.any?
       %table.table.payments-list
         %tbody
-          - current_user.involved_expenses.each do |expense|
+          - current_user.involved_expenses.sort_by(&:created_at).reverse.each do |expense|
             %tr
               - if expense.kind == "payment"
                 %td= expense
                 %td
                 %td
-                %td= expense.created_at.strftime("%b %-d")
+                %td.date= expense.created_at.strftime("%b %-d")
               - else
                 %td
                   %em.small Created by #{expense.creator}
@@ -28,7 +28,7 @@
                 %td.you-owe
                   %em.small You owe
                   %h5{class: (expense.owed_by(current_user.id) == 0.0 ? 'grey' : 'red') } $#{format("%.2f", expense.owed_by(current_user.id))}
-                %td
+                %td.date
                   %em.small #{expense.people_involved.count} involved
                   = expense.created_at.strftime("%b %-d")
 

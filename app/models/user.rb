@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   has_many :owed_expenses, through: :debts, source: :expense
 
-  has_one :default_address, -> { where(is_default: true) }, through: :wallet_addresses
+  has_one :default_address, -> { where(is_default: true) }, class_name: "WalletAddress"
 
   before_save do
     self.avatar_url ||= "https://testing-cdn.spark.re/uploads/material/upload/4ab581955f989e8f335f56fd34dd4a5c/Untitled_design__3_.png"
@@ -42,6 +42,6 @@ class User < ApplicationRecord
   end
 
   def involved_expenses
-    (entered_expenses + expenses + owed_expenses).uniq!
+    (expenses + owed_expenses).uniq
   end
 end

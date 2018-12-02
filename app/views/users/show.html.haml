@@ -21,10 +21,11 @@
             %hr
           .col-12
             - if current_user.wallet_addresses.any?
-              - current_user.wallet_addresses.each do |wa|
-                = wa.address
-                - if wa.is_default
-                  %em (Default)
+              .addresses
+                - current_user.wallet_addresses.each do |wa|
+                  = wa.address
+                  - if wa.is_default
+                    %em (Default)
             - else
               .text-center
                 %p You haven't registered any wallet addresses yet.

@@ -15,7 +15,7 @@ class Expense < ApplicationRecord
 
   def to_s
     if payment?
-      [payer, payment_kind, "$", amount, "to", debts.first.user, "."].join(" ")
+      [payer, payment_kind, "$#{format("%.2f", amount)}", "to", debts.first.user, "."].join(" ")
     else
       description.capitalize
     end

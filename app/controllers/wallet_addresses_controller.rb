@@ -9,6 +9,7 @@ class WalletAddressesController< ApplicationController
 
   def create
     current_user.wallet_addresses.create(address_params)
+    redirect_back fallback_location: user_path(current_user), flash: {success: "Added a new address"}
   end
 
   private

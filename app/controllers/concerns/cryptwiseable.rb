@@ -1,8 +1,4 @@
-module Authorization
-
-  included do
-    before_action :set_cryptwise
-  end
+module Cryptwiseable
 
   def client
     @client ||= Ethereum::HttpClient.new('http://localhost:9545')
@@ -21,7 +17,7 @@ module Authorization
       name: "Cryptwise",
       truffle: { paths: [ '/Users/shannon/Sites/splitwisr' ] },
       client: client,
-      address: contract.call.registered_contract
+      address: registry.call.registered_contract
     )
   end
 end
