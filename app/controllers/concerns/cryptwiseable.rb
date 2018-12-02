@@ -1,7 +1,7 @@
 module Cryptwiseable
 
   def client
-    @client ||= Ethereum::HttpClient.new('http://localhost:9545')
+    @client ||= Ethereum::HttpClient.new('http://localhost:8545')
   end
 
   def registry
@@ -17,7 +17,7 @@ module Cryptwiseable
       name: "Cryptwise",
       truffle: { paths: [ '/Users/shannon/Sites/splitwisr' ] },
       client: client,
-      address: registry.call.registered_contract
+      address: "0x#{registry.call.registered_contract}"
     )
   end
 end

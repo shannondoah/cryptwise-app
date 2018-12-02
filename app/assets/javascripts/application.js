@@ -15,6 +15,10 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require site
 //= require_tree
 //
+//= require contracts/cryptwise_registry_abi
+//= require contracts/cryptwise_abi
+//= require cryptwise
 

@@ -6,8 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-
 a = User.create!(
+  first_name: "Admin",
+  last_name: "User",
+  email: "shannon@spark.re",
+  password: "billy3lli0t",
+  admin: true
+)
+
+b = User.create!(
   first_name: "Anna",
   last_name: "Jenkins",
   avatar_url: "https://content-static.upwork.com/uploads/2014/10/01073427/profilephoto1.jpg"
@@ -15,7 +22,7 @@ a = User.create!(
   password: "security"
 )
 
-b = User.create!(
+c = User.create!(
   first_name: "Stan",
   last_name: "Hawthorne",
   avatar_url: "https://www.referralsaasquatch.com/wp-content/uploads/2017/02/Outdoor-Square-Profile-Derek.jpg",
@@ -35,7 +42,7 @@ b = User.create!(
   new_user.save!
 end
 
-[a,b].each do |u|
+[b,c].each do |u|
   User.where(id: Array.new(rand(10..25)) { rand(3...27) }.uniq).each do |u2|
     u2.friendships_as_secondary.create!(primary: u)
   end
@@ -43,7 +50,7 @@ end
 
 30.times.each do |n|
   Expense.create(
-    creator: [a,b].sample,
+    creator: [b,c].sample,
     payer: User.all.sample,
     amount: rand(10.0...125.0).round(2),
     description: Faker::Company.bs,

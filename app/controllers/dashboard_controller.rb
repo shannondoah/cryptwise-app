@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class DashboardController< ApplicationController
-  include Cryptwiseable
   before_action :authenticate_user!, :set_content, :set_variables_for_content
 
   def show
@@ -19,6 +18,8 @@ class DashboardController< ApplicationController
     when "expenses"
       @expenses = current_user.involved_expenses
     when "balances"
+      return unless current_user.default_address.present?
+
       set_cryptwise
       @balance_to_withdraw = @cryptwise.call.payments_for(current_user.default_address.address)
     end
