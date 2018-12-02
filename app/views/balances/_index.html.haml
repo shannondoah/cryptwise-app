@@ -7,8 +7,15 @@
     .pad-content
       .col-12.text-center
         %h5 Funds available to withdraw
-        %h3 ETH #{@balance_to_withdraw}
-        %button.btn.btn-success Withdraw Funds
+        - if defined?(@balance_to_withdraw)
+          %h3 ETH #{@balance_to_withdraw}
+          %button.btn.btn-success Withdraw Funds
+        - else
+          %h3 ETH $0.00
+          %p
+            %em You haven't set up a digital wallet address yet!
+          %buttom.btn.btn-info Find out more
+
         %hr
     - if current_user.friendships.any?
       %table.table.payments-list
