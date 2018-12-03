@@ -4,7 +4,7 @@ This is the centralized gateway to the Cryptwise smart contract project. The app
 
 ### Config
 
-In order to get the app up and running, it needs to be able to interact with the contracts. Currently, they have only been deployed locally. As such, to run them yourself, you would need to do the same via the [Cryptwise truffle project](), register the main contract, and then tweak the `smart_contracts.rb` initializer with the appropriate client network and truffle artifacts. This sets the main Cryptwise contract app-wide for performing server-side read functions and exposes the address to the client side for executing transactions.
+In order to get the app up and running, it needs to be able to interact with the contracts. Currently, they have only been deployed locally. As such, to run them yourself, you would need to do the same via the [Cryptwise truffle project](https://github.com/shannondoah/cryptwise), register the main contract, and then tweak the `smart_contracts.rb` initializer with the appropriate client network and truffle artifacts. This sets the main Cryptwise contract app-wide for performing server-side read functions and exposes the address to the client side for executing transactions.
 
 ### Required Packages
 
