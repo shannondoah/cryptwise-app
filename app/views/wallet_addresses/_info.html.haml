@@ -1,0 +1,26 @@
+.modal-header
+  %h4#myModalLabel.modal-title What's a Wallet Address?
+  %button.close{"data-dismiss" => "modal", :type => "button"} x
+.modal-body
+  %p Registering a wallet address with Cryptwise enables you to use the Ether to settle your debts with friends who have also registered their accounts with the app!
+
+  %p
+    If you don't currently have a digital wallet, have no fear! You can create one for no cost in matter of minutes. Consider trying
+    = succeed "." do
+      %a{href: "https://metamask.io/"} Metamask
+
+  %p
+    When you create your account,
+    %strong BE SURE TO STORE YOUR PRIVATE KEY SOMEWHERE SAFE.
+    If you lose access to your account, it is
+    %strong impossible
+    to withdraw any funds that have been allocated to that account.
+
+  %p
+    Once you register your address, your friends can start sending you deposits right away. This could be a good way to kick start your digital investments!
+
+.modal-footer
+  %p
+    = link_to user_path(current_user) do
+      Go to my account
+    and register an address now.

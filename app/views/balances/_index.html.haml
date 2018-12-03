@@ -10,26 +10,25 @@
     .pad-content
       .col-12.text-center
         %h5 Funds available to withdraw
-        - if defined?(@balance_in_cad)
-          - if @balance_in_eth > 0
-            %h3
-              .green $#{format("%.2f", @balance_in_cad)} CAD
-            %h4
-              %em.grey ETH #{@balance_in_eth}
-            %button.btn.btn-success#withdraw Withdraw Funds
-          - else
-            %h5
-              %em.grey Nothing to withdraw.
+        - if defined?(@balance_in_cad) && @balance_in_eth > 0
+          %h3
+            .green $#{format("%.2f", @balance_in_cad)} CAD
+          %h4
+            %em.grey ETH #{@balance_in_eth}
+          %button.btn.btn-success#withdraw Withdraw Funds
         - else
           %h3
             .grey $0.00 CAD
           %h4
             %em.grey ETH 0
-          %p
-            %em You haven't set up a digital wallet address yet!
-          %buttom.btn.btn-info Find out more
+          - if !current_user.default_address
+            %p
+              %em You haven't set up a digital wallet address yet!
+            = link_to "Find out more", info_user_wallet_addresses_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#wallet-info", class: "btn btn-info"
+            #wallet-info.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+              .modal-dialog{:role => "document"}
+                .modal-content
 
-        %hr
     - if current_user.friendships.any?
       %table.table.payments-list
         %tbody

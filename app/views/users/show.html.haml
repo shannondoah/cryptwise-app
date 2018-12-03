@@ -16,8 +16,13 @@
             %p= current_user.created_at.to_date
         %br
         .row
-          .col-12
+          .col-12.wallets-header
             %h4 Wallet Addresses
+            = link_to info_user_wallet_addresses_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#wallet-info", class: "btn btn-info" do
+              %span About
+            #wallet-info.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+              .modal-dialog{:role => "document"}
+                .modal-content
             %hr
           .col-12
             - if current_user.wallet_addresses.any?
@@ -32,7 +37,7 @@
                 %p Register one now to make it easier for your friends to deposit payments for you!
 
             .text-center
-              = link_to "Register an Address", new_user_wallet_address_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-info"
+              = link_to "Register an Address", new_user_wallet_address_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-success"
             #modal-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
               .modal-dialog{:role => "document"}
                 .modal-content
