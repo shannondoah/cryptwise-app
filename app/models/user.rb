@@ -38,7 +38,7 @@ class User < ApplicationRecord
   def friends
     secondary_ids = friendships_as_primary.pluck(:secondary_id)
     primary_ids = friendships_as_secondary.pluck(:primary_id)
-    User.where(id: [secondary_ids, primary_ids].flatten)
+    User.where(id: [secondary_ids, primary_ids, id].flatten)
   end
 
   def involved_expenses

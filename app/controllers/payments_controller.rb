@@ -17,7 +17,7 @@ class PaymentsController< ApplicationController
   private
 
   def payment_params
-    params.require(:expense).permit(:payment_kind, :amount, :debtor_ids)
+    params.require(:expense).permit(:payment_kind, :amount, debtor_ids: [])
   end
 
   def set_payee

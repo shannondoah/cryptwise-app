@@ -13,9 +13,9 @@
       = f.hidden_field :payment_kind, value: "paid"
     .form-group
       = f.label :amount, "Amount in CAD"
-      = f.number_field :amount, value: [@friendship.balance_of(current_user), 0.0].max, min: 0.0, required: true, class: "form-control"
+      = f.number_field :amount, value: [@friendship.balance_of(current_user), 0.0].max, min: 0.0, step: 0.01, required: true, class: "form-control"
 
-    = f.hidden_field :debtor_ids, value: @payee.id
+    = f.hidden_field :debtor_ids, value: @payee.id, multiple: true
 
   .modal-footer
     %button.btn.btn-primary#pay_button Save

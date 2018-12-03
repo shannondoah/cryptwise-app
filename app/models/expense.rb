@@ -7,7 +7,7 @@ class Expense < ApplicationRecord
   belongs_to :payer, class_name: "User"
   has_many :debts
 
-  after_save :update_total_balances
+  after_save :update_total_owings
 
   def payment?
     kind == "payment"
@@ -33,11 +33,10 @@ class Expense < ApplicationRecord
     debts.pluck(:user_id)
   end
 
-  def debtor_ids=(str)
-    ids = str.split(",")
-    ids.each do |uid|
+  def debtor_ids=(ids)
+    ids.reject(&:blank?).each do |uid|
       debt = debts.find_or_initialize_by(user_id: uid)
-      debt.amount = amount / ids.length
+      debt.amount = (amount / ids.length).round(2)
     end
   end
 
@@ -47,13 +46,13 @@ class Expense < ApplicationRecord
 
   private
 
-  def update_total_balances
-    payer.update(total_balance: payer.total_balance - amount)
+  def update_total_owings
+    payer.update(total_owing: payer.total_owing - amount)
     debts.each do |debt|
       fship = payer.friendship_with(debt.user_id)
       fship.balance(fship.primary == payer, debt.amount)
 
-      debt.user.update(total_balance: debt.user.total_balance + debt.amount)
+      debt.user.update(total_owing: debt.user.total_owing + debt.amount)
     end
   end
 end

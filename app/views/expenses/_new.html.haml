@@ -5,20 +5,20 @@
   .modal-body
     = devise_error_messages!
     .form-group
-      = f.label :amount
+      = f.label :payer_id
+      = f.collection_select :payer_id, User.all, :id, :first_name, {}, {class: "form-control"}
+    .form-group
+      = f.label :amount, "Amount paid"
       = f.number_field :amount, class: "form-control"
     .form-group
       = f.label :currency
       = f.select :currency, Expense::CURRENCIES, {include_blank: false}, {class: "form-control"}
     .form-group
       = f.label :description
-      = f.text_field :description, class: "form-control"
+      = f.text_field :description, placeholder: "Ex: Group dinner at Rogue", class: "form-control"
     .form-group
-      = f.label :payer_id
-      = f.collection_select :payer_id, User.all, :id, :first_name, {}, {class: "form-control"}
-    .form-group
-      %label People involved
-      = f.collection_select :debtor_ids, current_user.friends, :id, :first_name, {multiple: true}, {class: "form-control", multiple: true}
+      %label Paid for
+      = f.collection_select :debtor_ids, current_user.friends, :id, :name, {}, {class: "form-control", multiple: true}
 
   .modal-footer
     %button.btn.btn-primary Save

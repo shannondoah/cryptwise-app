@@ -3,9 +3,17 @@
   %h3= current_user
 
   %span
-  - if current_user.total_balance > 0
-    %span You owe
-    %h3.red $#{current_user.total_balance.round(2)} CAD
+    %span Your net balance is
+  - if current_user.total_owing > 0
+    %h3.red $#{current_user.total_owing.round(2)} CAD
   - else
-    %span You are owed
-    %h3.green $#{current_user.total_balance.abs.round(2)} CAD
+    %h3.green $#{current_user.total_owing.abs.round(2)} CAD
+  %span
+    Total paid:
+    %span
+      %strong $#{current_user.expenses.sum(:amount).round(2)}
+  %br
+  %span
+    Total owed:
+    %span
+      %strong $#{current_user.debts.sum(:amount).round(2)}

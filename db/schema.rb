@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_02_230110) do
+ActiveRecord::Schema.define(version: 2018_12_03_004737) do
 
   create_table "debts", force: :cascade do |t|
     t.integer "expense_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_230110) do
     t.datetime "remember_created_at"
     t.string "first_name"
     t.string "last_name"
-    t.float "total_balance", default: 0.0, null: false
+    t.float "total_owing", default: 0.0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "avatar_url"

@@ -5,10 +5,6 @@ class ExpensesController< ApplicationController
 
   def new
     @expense = current_user.expenses.build
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def create
@@ -19,6 +15,6 @@ class ExpensesController< ApplicationController
   private
 
   def expense_params
-    params.require(:expense).permit(:amount, :currency, :description, :payer_id, :debtor_ids, :category, :split_evenly)
+    params.require(:expense).permit(:amount, :currency, :description, :payer_id, :category, :split_evenly, debtor_ids: [])
   end
 end

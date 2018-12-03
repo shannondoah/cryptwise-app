@@ -30,13 +30,15 @@ c = User.create!(
   password: "woofwoof"
 )
 
+b.friendships_as_primary.create(secondary: c)
+
 25.times.each do |n|
   password = Devise.friendly_token[0, 8]
   new_user = User.new(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
-    avatar_url: "http://voice4thought.org/wp-content/uploads/2016/08/default1.jpg"
+    avatar_url: "https://testing-cdn.spark.re/uploads/material/upload/4ab581955f989e8f335f56fd34dd4a5c/Untitled_design__3_.png"
     password: password
   )
   new_user.save!
@@ -49,27 +51,25 @@ end
 end
 
 30.times.each do |n|
-  Expense.create(
-    creator: [b,c].sample,
-    payer: User.all.sample,
-    amount: rand(10.0...125.0).round(2),
-    description: Faker::Company.bs,
-    kind: "payment",
-    payment_kind: Expense::PAYMENT_KINDS.sample,
-    debtor_ids: User.pluck(:id).sample(rand(1..6)).join(","),
-    created_at: rand(1.month.ago..1.day.ago)
-  )
+  e = Expense.new
+  e.creator = [b,c].sample
+  e.payer = User.all.sample
+  e.amount = rand(10.0...125.0).round(2)
+  e.description = Faker::Company.bs
+  e.debtor_ids = e.payer.friendships.pluck(:primary_id).uniq.sample(rand(2..6))
+  e.created_at = rand(1.month.ago..1.day.ago)
+  e.save!
 end
 
 10.times.each do |n|
   payer = User.all.sample
-  Expense.create(
-    payer: payer,
-    creator: payer,
-    amount: rand(10.0...50.0).round,
-    kind: "payment",
-    payment_kind: Expense::PAYMENT_KINDS.sample,
-    debtor_ids: User.pluck(:id).sample(2).join(","),
-    created_at: rand(2.weeks.ago..1.day.ago)
-  )
+  e = Expense.new
+  e.payer = payer
+  e.creator = payer
+  e.amount = rand(10.0...50.0).round
+  e.kind = "payment"
+  e.payment_kind = "paid"
+  e.debtor_ids = [User.pluck(:id).sample]
+  e.created_at = rand(2.weeks.ago..1.day.ago)
+  e.save!
 end
