@@ -28,11 +28,11 @@ Simply sign up, add friends, and start recording payments!
 
 There are obviously many limitations of this grossly simplified application (not taking into account the limitations based on the fact that this is not live). Some of the most obvious:
 
-• Friends must already be signed up with the app in order to record expenses or payments
-• Expenses can currently only be recorded in CAD
-• CAD to ETH conversion is hardcoded to the conversion rate specified by Google on Dec 2nd, 2018
-• Expenses can only be split equally between participants
-• No sorting/searching/pagination
-• Database design not very query/aggregate-friendly - would start over completely given more time
+- Friends must already be signed up with the app in order to record expenses or payments
+- Expenses can currently only be recorded in CAD
+- CAD to ETH conversion is hardcoded to the conversion rate specified by Google on Dec 2nd, 2018
+- Expenses can only be split equally between participants
+- No sorting/searching/pagination
+- Database design not very query/aggregate-friendly - would start over completely given more time
 
 Support for multiple currencies and live conversion rates would add significant value.
