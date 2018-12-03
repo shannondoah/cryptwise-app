@@ -5,15 +5,15 @@
   %span
     %span Your net balance is
   - if current_user.total_owing > 0
-    %h3.red $#{current_user.total_owing.round(2)} CAD
+    %h3.red $#{format("%.2f", current_user.total_owing)} CAD
   - else
-    %h3.green $#{current_user.total_owing.abs.round(2)} CAD
+    %h3.green $#{format("%.2f", current_user.total_owing.abs)} CAD
   %span
     Total paid:
     %span
-      %strong $#{current_user.expenses.sum(:amount).round(2)}
+      %strong $#{format("%.2f", current_user.expenses.sum(:amount))}
   %br
   %span
     Total owed:
     %span
-      %strong $#{current_user.debts.sum(:amount).round(2)}
+      %strong $#{format("%.2f", current_user.debts.sum(:amount))}
