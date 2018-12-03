@@ -6,7 +6,7 @@
     = devise_error_messages!
     .form-group
       = f.label :payer_id
-      = f.collection_select :payer_id, User.all, :id, :first_name, {}, {class: "form-control"}
+      = f.collection_select :payer_id, User.all, :id, :name, {}, {class: "form-control"}
     .form-group
       = f.label :amount, "Amount paid"
       = f.number_field :amount, class: "form-control"

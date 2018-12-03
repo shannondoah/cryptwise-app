@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :payments, only: %i[new create]
   resources :expenses, only: %i[new create]
+  resources :friendships, only: %i[new create]
   resource :dashboard, only: :show
   get :homepage, to: "pages#show"
 

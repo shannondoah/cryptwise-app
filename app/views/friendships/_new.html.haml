@@ -1,0 +1,12 @@
+= form_for @friendship do |f|
+  .modal-header
+    %h4#myModalLabel.modal-title Add a friend
+    %button.close{"data-dismiss" => "modal", :type => "button"} x
+  .modal-body
+    = devise_error_messages!
+    .form-group
+      = f.label :secondary_id, "Name"
+      = f.collection_select :secondary_id, User.all, :id, :name, {}, {class: "form-control"}
+
+  .modal-footer
+    %button.btn.btn-primary Save

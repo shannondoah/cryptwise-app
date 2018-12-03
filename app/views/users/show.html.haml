@@ -18,7 +18,7 @@
         .row
           .col-12.wallets-header
             %h4 Wallet Addresses
-            = link_to info_user_wallet_addresses_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#wallet-info", class: "btn btn-info" do
+            = link_to info_user_wallet_addresses_path(current_user), remote: true, "data-toggle" => "modal", "data-target" => "#wallet-info", class: "btn btn-outline-info" do
               %span About
             #wallet-info.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
               .modal-dialog{:role => "document"}

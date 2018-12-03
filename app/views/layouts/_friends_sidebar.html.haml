@@ -13,3 +13,10 @@
   - else
     %p
       %em You have no friends :(
+
+  %hr
+  .container.no-padding.text-center
+    = link_to "Add Friend", new_friendship_path, remote: true, "data-toggle" => "modal", "data-target" => "#modal-window", class: "btn btn-outline-success"
+    #friendship-window.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog"}
+      .modal-dialog{:role => "document"}
+        .modal-content
