@@ -6,16 +6,22 @@ This is the centralized gateway to the Cryptwise smart contract project. The app
 
 In order to get the app up and running, it needs to be able to interact with the contracts. Currently, they have only been deployed locally. As such, to run them yourself, you would need to do the same via the [Cryptwise truffle project](https://github.com/shannondoah/cryptwise), register the main contract, and then tweak the `smart_contracts.rb` initializer with the appropriate client network and truffle artifacts. This sets the main Cryptwise contract app-wide for performing server-side read functions and exposes the address to the client side for executing transactions.
 
+Using the `ethereum.rb` gem, it (theoretically) would have been possible to build and deploy my contracts from within this application, but for the ease familiarity of leveraging open zeppelin contracts and the testing suite, I kept the two parts separate.
+
 ### Required Packages
 
 Rails 5.2
+
 Ruby 2.3.3
 
 `bundle install`
+
 `rails db:migrate`
+
 `rails server`
 
 **OPTIONAL**
+
 `rails db:seed` to seed some test data into the database
 
 ## Using the app
