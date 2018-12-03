@@ -16,8 +16,8 @@ class Friendship < ApplicationRecord
     primary == user ? primary_owes : secondary_owes
   end
 
-  def balance(payerIsPrimary, amount)
-    if payerIsPrimary
+  def balance(payer_is_primary, amount)
+    if payer_is_primary
       self.primary_owes -= amount
       self.secondary_owes += amount
     else

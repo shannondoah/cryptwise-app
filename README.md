@@ -32,7 +32,7 @@ There are obviously many limitations of this grossly simplified application (not
 • Expenses can currently only be recorded in CAD
 • CAD to ETH conversion is hardcoded to the conversion rate specified by Google on Dec 2nd, 2018
 • Expenses can only be split equally between participants
-• No sorting/searching
+• No sorting/searching/pagination
 • Database design not very query/aggregate-friendly - would start over completely given more time
 
 Support for multiple currencies and live conversion rates would add significant value.

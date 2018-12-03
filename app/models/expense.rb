@@ -34,7 +34,8 @@ class Expense < ApplicationRecord
   end
 
   def debtor_ids=(ids)
-    ids.reject(&:blank?).each do |uid|
+    ids = ids.reject(&:blank?)
+    ids.each do |uid|
       debt = debts.find_or_initialize_by(user_id: uid)
       debt.amount = (amount / ids.length).round(2)
     end

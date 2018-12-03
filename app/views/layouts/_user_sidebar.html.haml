@@ -4,10 +4,10 @@
 
   %span
     %span Your net balance is
-  - if current_user.total_owing > 0
-    %h3.red $#{format("%.2f", current_user.total_owing)} CAD
+  - if current_user.net_balance < 0
+    %h3.red $#{format("%.2f", current_user.net_balance.abs)} CAD
   - else
-    %h3.green $#{format("%.2f", current_user.total_owing.abs)} CAD
+    %h3.green $#{format("%.2f", current_user.net_balance)} CAD
   %span
     Total paid:
     %span

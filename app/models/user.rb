@@ -44,4 +44,8 @@ class User < ApplicationRecord
   def involved_expenses
     (expenses + owed_expenses).uniq
   end
+
+  def net_balance
+    expenses.sum(:amount) - debts.sum(:amount)
+  end
 end
