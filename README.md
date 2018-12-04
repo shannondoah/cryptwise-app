@@ -40,5 +40,6 @@ There are obviously many limitations of this grossly simplified application (not
 * Expenses can only be split equally between participants
 * No sorting/searching/pagination
 * Database design not very query/aggregate-friendly - would start over completely given more time
+* No groups (ex: Vacation groups) or debt simplification (ex: Alice owes Bob $20, and Bob owes Eve $20, therefore Alice owes Eve $20)
 
 Support for multiple currencies and live conversion rates would add significant value.
